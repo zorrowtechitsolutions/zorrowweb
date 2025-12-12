@@ -1,15 +1,15 @@
 "use client"
 
-import About from "./components/about"
-import Contact from "./components/contact"
-import DigitalMarketing from "./components/digital-marketing"
-import FashionSchool from "./components/fashion-school"
-import Footer from "./components/footer"
-import Hero from "./components/hero"
-import HostaApp from "./components/hosta-app"
-import Navigation from "./components/navigation"
-import Solutions from "./components/solution"
-import WhyWorkWithUs from "./components/why-work-with-us"
+import About from "./components/About"
+import Contact from "./components/Contact"
+import DigitalMarketing from "./components/Digital-marketing"
+import FashionSchool from "./components/Fashion-school"
+import Footer from "./components/Footer"
+import Hero from "./components/Hero"
+import HostaApp from "./components/Hosta-app"
+import Navigation from "./components/Navigation"
+import Solutions from "./components/Solution"
+import WhyWorkWithUs from "./components/Why-work-with-us"
 
 export default function App() {
   return (
