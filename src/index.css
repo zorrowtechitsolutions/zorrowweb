@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ==========================
+   COLOR VARIABLES
+========================== */
+:root {
+  --background: #0a0e27;
+  --foreground: #e8ebf7;
+  --primary: #00a8ff;
+  --secondary: #1a2555;
+  --accent: #00d4ff;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================
+   THEME MAPPING
+========================== */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+}
+
+/* ==========================
+   BASE
+========================== */
+body {
+  @apply bg-background text-foreground;
+
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(0, 168, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+}
+
+/* ==========================
+   GLASS EFFECTS
+========================== */
+.glass {
+  @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg;
+}
+
+.glass-subtle {
+  @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-xl shadow-sm;
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-white/10 border border-white/10 rounded-2xl shadow-lg;
+}
+
+.glass-nano {
+  @apply backdrop-blur-md bg-white/10 border border-white/10 rounded-xl;
+}
+
+/* ==========================
+   PARALLAX BG
+========================== */
+.parallax-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(800px, 90vw);
+  height: min(800px, 90vw);
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================
+   GLOBAL UTILITIES
+========================== */
+
+/* Smooth scrolling everywhere */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar on webkit browsers */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/* Button reset override (makes glass clickable blocks nicer) */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
