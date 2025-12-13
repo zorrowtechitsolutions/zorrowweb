@@ -50,7 +50,7 @@ export default function HostaApp() {
                 {/* Download App button opens popup */}
                 <button
                   onClick={() => setIsDownloadOpen(true)}
-                  className="px-6 py-3 bg-green-400 hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold transition-all inline-flex items-center gap-2"
+                  className="px-6 py-3 bg-green-600 hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold transition-all inline-flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Download App
@@ -129,7 +129,7 @@ export default function HostaApp() {
                 href="https://play.google.com/store/apps/details?id=com.zorrowtech.hostamanager&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-slate-900 bg-green-500 hover:bg-green-300 transition-all shadow-md border-0"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-slate-900 bg-green-600 hover:bg-green-300 transition-all shadow-md border-0"
               >
                 <Smartphone className="w-4 h-4" />
                 Download for Android
@@ -156,3 +156,4 @@ export default function HostaApp() {
     </section>
   );
 }
+
