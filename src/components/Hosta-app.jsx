@@ -140,7 +140,7 @@ export default function HostaApp() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold 
-             text-slate-900 bg-green-500 hover:bg-green-400 transition-all shadow-md"
+             text-slate-900 bg-green-500 hover:bg-green-600 transition-all shadow-md"
               >
                 <Apple className="w-4 h-4" />
                 Download for iOS
@@ -156,4 +156,5 @@ export default function HostaApp() {
     </section>
   );
 }
+
 
