@@ -25,48 +25,102 @@
 }
 
 /* ==========================
+   HARD MOBILE STABILITY FIX
+========================== */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+
+  /* ❌ REMOVE smooth scrolling (causes jitter on mobile) */
+  scroll-behavior: auto;
+
+  /* ✅ iOS stability */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================
    BASE
 ========================== */
 body {
   @apply bg-background text-foreground;
 
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(0, 168, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+  /* ❌ REMOVE background-image from body (causes repaint) */
+  background-image: none;
+  background-attachment: scroll;
 }
 
 /* ==========================
-   GLASS EFFECTS
+   SAFE GRADIENT OVERLAY (STATIC)
+========================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -5;
+
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(0, 168, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+
+  transform: translateZ(0);     /* GPU lock */
+  will-change: transform;
+  contain: paint;
+}
+
+/* ==========================
+   GLASS EFFECTS (iOS SAFE)
 ========================== */
 .glass {
-  @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg;
+  @apply bg-white/5 border border-white/10 rounded-2xl shadow-lg;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .glass-subtle {
-  @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-xl shadow-sm;
+  @apply bg-white/5 border border-white/10 rounded-xl shadow-sm;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .glass-card {
-  @apply backdrop-blur-xl bg-white/10 border border-white/10 rounded-2xl shadow-lg;
+  @apply bg-white/10 border border-white/10 rounded-2xl shadow-lg;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .glass-nano {
-  @apply backdrop-blur-md bg-white/10 border border-white/10 rounded-xl;
+  @apply bg-white/10 border border-white/10 rounded-xl;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* ==========================
-   PARALLAX BG
+   PARALLAX (DISABLED ON MOBILE)
 ========================== */
 .parallax-bg {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(800px, 90vw);
-  height: min(800px, 90vw);
-  opacity: 0.1;
-  pointer-events: none;
-  z-index: 0;
+  display: none; /* 🔒 kill mobile parallax completely */
+}
+
+/* Enable parallax ONLY on desktop */
+@media (min-width: 1024px) {
+  .parallax-bg {
+    display: block;
+    position: fixed;
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0);
+    width: min(800px, 90vw);
+    height: min(800px, 90vw);
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+  }
 }
 
 .parallax-content {
@@ -78,18 +132,14 @@ body {
    GLOBAL UTILITIES
 ========================== */
 
-/* Smooth scrolling everywhere */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Hide scrollbar on webkit browsers */
+/* ❌ REMOVE hidden scrollbar (causes repaint on iOS) */
 ::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  display: none;
 }
 
-/* Button reset override (makes glass clickable blocks nicer) */
-button, a {
+/* Button & tap behavior */
+button,
+a {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
