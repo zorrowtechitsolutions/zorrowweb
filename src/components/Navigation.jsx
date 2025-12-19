@@ -17,7 +17,7 @@ export default function Navigation() {
     { label: "Contact", href: "#contact" },
   ]
 
-  /* ✅ AUTO CLOSE ON SCROLL */
+  /* AUTO CLOSE ON SCROLL */
   useEffect(() => {
     if (!isOpen) return
     const close = () => setIsOpen(false)
@@ -31,7 +31,7 @@ export default function Navigation() {
       <div className="h-16 md:h-20" />
 
       {/* NAVBAR */}
-      <nav className="fixed top-0 inset-x-0 z-50 glass border-b border-white/10 backdrop-blur-2xl">
+      <nav className="fixed top-0 inset-x-0 z-50 glass border-b border-white/10 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
 
@@ -47,7 +47,7 @@ export default function Navigation() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-white/70 hover:text-primary"
+                  className="text-sm text-white/70 hover:text-primary transition"
                 >
                   {link.label}
                 </a>
@@ -79,14 +79,15 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* MOBILE MENU OVERLAY (LIGHT BACKGROUND) */}
+      {/* MOBILE MENU OVERLAY */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="absolute top-20 left-4 right-4 rounded-2xl bg-white/10 backdrop-blur-2xl border border-white/10"
+            className="absolute top-20 left-4 right-4 rounded-2xl 
+            bg-white/15 backdrop-blur-xl border border-white/20"
             onClick={(e) => e.stopPropagation()}
           >
             {/* CLOSE */}
@@ -102,7 +103,7 @@ export default function Navigation() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block px-4 py-3 text-white/80"
+                  className="block px-4 py-3 text-white/85"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
@@ -121,31 +122,47 @@ export default function Navigation() {
                 Book a Call
               </button>
             </div>
-
           </div>
         </div>
       )}
 
       {/* CALL POPUP */}
       {showCallPopup && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="relative w-full max-w-sm p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/15">
-
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center
+          bg-black/20 backdrop-blur-[2px]"
+          onClick={() => setShowCallPopup(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-sm p-7 rounded-3xl
+            bg-white/20 backdrop-blur-xl border border-white/25 shadow-xl"
+          >
+            {/* CLOSE */}
             <button
               onClick={() => setShowCallPopup(false)}
-              className="absolute top-3 right-3 text-white/70"
+              className="absolute top-3 right-3 text-white/80"
             >
               <X size={22} />
             </button>
 
-            <h3 className="text-xl text-white text-center font-semibold">
+            <h3 className="text-lg text-white text-center font-semibold">
               Book a Call
             </h3>
 
-            <div className="space-y-4 mt-6">
+            <p className="text-sm text-white/70 text-center mt-1">
+              Call or connect with us instantly
+            </p>
+
+            <div className="space-y-3 mt-6">
               <a
                 href="tel:8714412090"
-                className="flex justify-center items-center gap-2 py-3 rounded-full bg-blue-400 text-black font-semibold"
+                className="
+                  flex justify-center items-center gap-2
+                  py-3 rounded-full
+                  bg-blue-400 hover:bg-blue-300
+                  text-black font-semibold transition
+                "
               >
                 <Phone size={18} /> Call Now
               </a>
@@ -153,12 +170,17 @@ export default function Navigation() {
               <a
                 href="https://wa.me/918714412090"
                 target="_blank"
-                className="flex justify-center items-center gap-2 py-3 rounded-full bg-blue-400 text-black font-semibold"
+                rel="noopener noreferrer"
+                className="
+                  flex justify-center items-center gap-2
+                  py-3 rounded-full
+                  bg-blue-400 hover:bg-blue-300
+                  text-black font-semibold transition
+                "
               >
                 <MessageCircle size={18} /> WhatsApp
               </a>
             </div>
-
           </div>
         </div>
       )}
