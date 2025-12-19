@@ -97,7 +97,7 @@ export default function Hero() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">Zorrowtech IT Solutions</h3>
                 <span className="text-xs px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full font-semibold">
-                  Our First Brand
+                Our First Brand
                 </span>
               </div>
               <p className="text-sm text-foreground/60">
@@ -131,7 +131,7 @@ export default function Hero() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">Zorrow Digital Marketing</h3>
                 <span className="text-xs px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full font-semibold">
-                  Coming Soon
+                Coming Soon
                 </span>
               </div>
               <p className="text-sm text-foreground/60">
@@ -157,3 +157,4 @@ export default function Hero() {
     </section>
   );
 }
+
