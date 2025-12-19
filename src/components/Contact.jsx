@@ -46,7 +46,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-1 px-4 sm:px- lg:px- overflow-hidden"
     >
       <div className="relative max-w-2xl mx-auto z-10">
         
