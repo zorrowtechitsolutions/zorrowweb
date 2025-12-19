@@ -57,7 +57,6 @@ export default function Contact() {
       text-3xl sm:text-4xl md:text-5xl
       font-semibold tracking-tight
       leading-tight sm:leading-snug md:leading-[1.15]
-      pb-1
       bg-gradient-to-r from-primary to-purple-400
       bg-clip-text text-transparent
     "
@@ -211,4 +210,5 @@ export default function Contact() {
     </section>
   )
 }
+
 
