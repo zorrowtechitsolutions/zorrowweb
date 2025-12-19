@@ -107,14 +107,14 @@ export default function Footer() {
 
       {/* ✅ FINAL COPYRIGHT BAR (FULL BOTTOM) */}
       <div className="
-        w-full
-        bg-black/40
+       w-full
+       
         backdrop-blur-xl
         border-t border-white/10
       ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-xs sm:text-sm text-foreground/50">
-            © {currentYear} Zorrowtech IT Solutions. All rights reserved.
+            © {2025} Zorrow.All rights reserved.
             <span className="hidden sm:inline"> Hosta App is our flagship product.</span>
           </p>
         </div>
@@ -122,3 +122,4 @@ export default function Footer() {
     </footer>
   )
 }
+
