@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X, Phone, MessageCircle } from "lucide-react"
 
 export default function Navigation() {
@@ -17,25 +17,32 @@ export default function Navigation() {
     { label: "Contact", href: "#contact" },
   ]
 
+  /* ✅ AUTO-CLOSE MOBILE MENU ON SCROLL */
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleScroll = () => {
+      setIsOpen(false)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [isOpen])
+
   return (
     <>
-      {/* 🔒 HEADER SPACER (prevents scroll-under) */}
+      {/* HEADER SPACER */}
       <div className="h-16 md:h-20" />
 
-      {/* ✅ FIXED HEADER */}
-      <nav
-        className="
-          fixed top-0 inset-x-0 z-50
-          glass
-          border-b border-white/10
-          backdrop-blur-2xl
-          supports-[backdrop-filter]:bg-white/10
-        "
-      >
+      {/* FIXED NAVBAR */}
+      <nav className="fixed top-0 inset-x-0 z-50 glass border-b border-white/10 backdrop-blur-2xl supports-[backdrop-filter]:bg-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            
-            {/* Logo */}
+
+            {/* LOGO */}
             <div className="flex items-center gap-3">
               <img
                 src="/img1.png"
@@ -49,86 +56,76 @@ export default function Navigation() {
               </span>
             </div>
 
-            {/* Desktop Navigation */}
+            {/* DESKTOP NAV */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="
-                    text-sm font-medium
-                    text-foreground/70
-                    hover:text-primary
-                    transition-colors
-                  "
+                  className="text-sm font-medium text-white/70 hover:text-primary transition"
                 >
                   {link.label}
                 </a>
               ))}
             </div>
 
-            {/* Desktop Book Call */}
+            {/* DESKTOP BOOK CALL */}
             <div className="hidden lg:block">
               <button
                 onClick={() => setShowCallPopup(true)}
-                className="
-                  px-6 py-2 rounded-lg
-                  bg-primary text-primary-foreground
-                  font-semibold
-                  hover:bg-primary/90
-                  transition-colors
-                "
+                className="px-6 py-2 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition"
               >
                 Book a Call
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* MOBILE TOGGLE */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 text-foreground"
+              className="lg:hidden p-2 text-white"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
+
           </div>
-
-          {/* Mobile Menu */}
-          {isOpen && (
-            <div className="lg:hidden pb-4 border-t border-white/10">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="
-                    block px-4 py-2 text-sm
-                    text-foreground/70
-                    hover:text-primary
-                  "
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-
-              <button
-                onClick={() => {
-                  setIsOpen(false)
-                  setShowCallPopup(true)
-                }}
-                className="
-                  block w-full mt-4 mx-4 px-6 py-2
-                  bg-primary text-primary-foreground
-                  rounded-lg font-semibold
-                "
-              >
-                Book a Call
-              </button>
-            </div>
-          )}
         </div>
       </nav>
 
-      {/* 📌 CALL POPUP */}
+      {/* MOBILE MENU (BOOK A CALL LAST) */}
+      {isOpen && (
+        <div className="lg:hidden mt-4 mx-4 rounded-2xl border border-white/10 bg-white/10 backdrop-blur-2xl overflow-hidden">
+
+          {/* NAV LINKS */}
+          <div className="divide-y divide-white/10">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="block px-4 py-3 text-sm text-white/80 hover:text-primary"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* BOOK A CALL — LAST */}
+          <div className="p-4">
+            <button
+              onClick={() => {
+                setIsOpen(false)
+                setShowCallPopup(true)
+              }}
+              className="w-full px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition"
+            >
+              Book a Call
+            </button>
+          </div>
+
+        </div>
+      )}
+
+      {/* CALL POPUP */}
       {showCallPopup && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="relative w-full max-w-sm mx-4 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-2xl shadow-2xl p-8 space-y-6">
@@ -165,6 +162,7 @@ export default function Navigation() {
               <MessageCircle size={18} />
               WhatsApp Us
             </a>
+
           </div>
         </div>
       )}
