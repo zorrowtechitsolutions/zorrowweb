@@ -23,17 +23,21 @@ export default function Hero() {
             <div className="space-y-4">
               <h1
                 className="
-                  text-4xl sm:text-5xl md:text-6xl lg:text-7xl
-                  font-bold
-                  leading-tight sm:leading-snug
-                "
+    text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+    font-bold
+    leading-tight sm:leading-snug
+  "
               >
-                Zorrow Where
+                <span className="block">Zorrow Where</span>
                 <span className="block bg-gradient-to-r from-primary via-blue-400 to-accent bg-clip-text text-transparent">
                   Technology,
+                </span>
+
+                <span className="block bg-gradient-to-r from-primary via-blue-400 to-accent bg-clip-text text-transparent">
                   Brands & Fashion
                 </span>
-                Meet
+
+                <span className="block">Meet</span>
               </h1>
 
               <p className="text-base sm:text-lg text-foreground/70 max-w-md leading-relaxed">
@@ -98,7 +102,7 @@ export default function Hero() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">Zorrowtech IT Solutions</h3>
                 <span className="text-xs px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full font-semibold">
-                Our First Brand
+                  Our First Brand
                 </span>
               </div>
               <p className="text-sm text-foreground/60">
@@ -132,7 +136,7 @@ export default function Hero() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">Zorrow Digital Marketing</h3>
                 <span className="text-xs px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full font-semibold">
-                Coming Soon
+                  Coming Soon
                 </span>
               </div>
               <p className="text-sm text-foreground/60">
@@ -158,5 +162,3 @@ export default function Hero() {
     </section>
   );
 }
-
-
