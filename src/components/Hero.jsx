@@ -30,7 +30,8 @@ export default function Hero() {
               >
                 Zorrow Where
                 <span className="block bg-gradient-to-r from-primary via-blue-400 to-accent bg-clip-text text-transparent">
-                  Technology, Brands & Fashion
+                  Technology,
+                  Brands & Fashion
                 </span>
                 Meet
               </h1>
@@ -157,4 +158,5 @@ export default function Hero() {
     </section>
   );
 }
+
 
