@@ -1,159 +1,213 @@
-"use client";
+"use client"
 
-export default function Hero() {
+import { useState } from "react"
+import { Send } from "lucide-react"
+
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    projectType: "",
+    message: "",
+  })
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const form = e.target
+
+    try {
+      const response = await fetch("https://formspree.io/f/xblnakqk", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      })
+
+      if (response.ok) {
+        alert("Message sent successfully! We'll contact you soon.")
+        setFormData({
+          name: "",
+          email: "",
+          projectType: "",
+          message: "",
+        })
+        form.reset()
+      } else {
+        alert("Something went wrong. Please try again.")
+      }
+    } catch {
+      alert("Something went wrong. Please try again.")
+    }
+  }
+
   return (
     <section
-      id="home"
-      className="
-        relative
-        min-h-[100svh]
-        flex items-center justify-center
-        pt-8 pb-16
-        overflow-hidden
-      "
+      id="contact"
+      className="relative py-1 px-4 sm:px- lg:px- overflow-hidden"
     >
-      {/* Background gradient orbs */}
-      <div className="absolute top-0 left-1/4 w-80 h-80 md:w-96 md:h-96 bg-primary/10 rounded-full blur-3xl opacity-20 pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 md:w-96 md:h-96 bg-accent/10 rounded-full blur-3xl opacity-20 pointer-events-none" />
+      <div className="relative max-w-2xl mx-auto z-10">
+        
+    {/* Heading */}
+<div className="text-center mb-12 px-2 overflow-visible">
+  <h2
+    className="
+      text-3xl sm:text-4xl md:text-5xl
+      font-semibold tracking-tight
+      leading-tight sm:leading-snug md:leading-[1.15]
+      pb-1
+      bg-gradient-to-r from-primary to-purple-400
+      bg-clip-text text-transparent
+    "
+  >
+    Let&apos;s Build Something Futuristic
+  </h2>
+</div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* LEFT CONTENT */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1
-                className="
-                  text-4xl sm:text-5xl md:text-6xl lg:text-7xl
-                  font-bold
-                  leading-tight sm:leading-snug
-                "
-              >
-                Zorrow Where
-                <span className="block bg-gradient-to-r from-primary via-blue-400 to-accent bg-clip-text text-transparent">
-                  Technology, Brands & Fashion
-                </span>
-                Meet
-              </h1>
 
-              <p className="text-base sm:text-lg text-foreground/70 max-w-md leading-relaxed">
-                Zorrow is the parent brand of Zorrowtech IT Solutions.
-                We&apos;re building innovative products starting with Hosta, our
-                healthcare app, while launching Zorrow Digital Marketing and
-                Zorrow School of Fashion.
-              </p>
+        {/* Glass Card */}
+        <div
+          className="
+            relative
+            rounded-2xl
+            bg-white/2
+            backdrop-blur-2xl
+            border border-white/10
+            p-8 sm:p-10 md:p-12
+          "
+        >
+          {/* Inner glass highlight */}
+          <div className="absolute inset-0 rounded-2xl  from-white/10 via-transparent to-transparent pointer-events-none" />
+
+          <form onSubmit={handleSubmit} className="relative space-y-6">
+            
+            {/* Name + Email */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-white/80">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your name"
+                  className="
+                    w-full px-4 py-3 rounded-lg
+                    bg-white/10 text-white
+                    border border-white/20
+                    placeholder-white/40
+                    backdrop-blur-xl
+                    focus:outline-none
+                    focus:ring-2 focus:ring-primary/80
+                    transition
+                  "
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-white/80">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="your@email.com"
+                  className="
+                    w-full px-4 py-3 rounded-lg
+                    bg-white/10 text-white
+                    border border-white/20
+                    placeholder-white/40
+                    backdrop-blur-xl
+                    focus:outline-none
+                    focus:ring-2 focus:ring-primary/80
+                    transition
+                  "
+                />
+              </div>
             </div>
 
-            {/* CTA BUTTONS */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              {/* Primary CTA */}
-              <a
-                href="#solutions"
+            {/* Project Type */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-white/80">
+                Project Type
+              </label>
+              <input
+                type="text"
+                name="projectType"
+                value={formData.projectType}
+                onChange={handleChange}
+                placeholder="Website, App, Branding, Marketing..."
                 className="
-                  inline-flex
-                  items-center justify-center
-                  px-8 py-3
-                  min-h-[48px]
-                  bg-primary hover:bg-primary/90
-                  text-primary-foreground
-                  rounded-xl
-                  font-semibold
+                  w-full px-4 py-3 rounded-lg
+                  bg-white/10 text-white
+                  border border-white/20
+                  placeholder-white/40
+                  backdrop-blur-xl
+                  focus:outline-none
+                  focus:ring-2 focus:ring-primary/80
                   transition
-                  hover:scale-105 active:scale-95
-                  text-center
-                  whitespace-nowrap
                 "
-              >
-                Explore Our Solutions
-              </a>
+              />
+            </div>
 
-              {/* Secondary CTA */}
-              <a
-                href="#hosta"
+            {/* Message */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-white/80">
+                Message
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                placeholder="Tell us about your project..."
                 className="
-                  inline-flex
-                  items-center justify-center
-                  px-8 py-3
-                  min-h-[48px]
-                  glass
-                  border border-primary/50
-                  rounded-xl
-                  font-semibold
-                  text-foreground
+                  w-full px-4 py-3 rounded-lg
+                  bg-white/10 text-white
+                  border border-white/20
+                  placeholder-white/40
+                  backdrop-blur-xl
+                  resize-none
+                  focus:outline-none
+                  focus:ring-2 focus:ring-primary/80
                   transition
-                  hover:bg-card/70
-                  text-center
-                  whitespace-nowrap
+                "
+              />
+            </div>
+
+            {/* Submit */}
+            <div className="flex justify-center pt-4">
+              <button
+                type="submit"
+                className="
+                  flex items-center gap-2
+                  px-8 py-3
+                  rounded-xl
+                  bg-primary text-primary-foreground
+                  font-semibold
+                  transition-all
+                  hover:bg-primary/85
+                  hover:scale-105
+                  active:scale-95
+                  shadow-md hover:shadow-lg
                 "
               >
-                Learn About Hosta
-              </a>
+                <Send className="w-5 h-5" />
+                Send Message
+              </button>
             </div>
-          </div>
-
-          {/* RIGHT STACK */}
-          <div className="space-y-3 sm:space-y-4 flex flex-col justify-center">
-            {/* 1. Zorrowtech */}
-            <div className="glass p-6 space-y-3 transition md:hover:scale-105">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold">Zorrowtech IT Solutions</h3>
-                <span className="text-xs px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full font-semibold">
-                  Our First Brand
-                </span>
-              </div>
-              <p className="text-sm text-foreground/60">
-                Visit our official website:{" "}
-                <a
-                  href="https://zorrowtech.in"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline text-primary hover:text-primary/80"
-                >
-                  zorrowtech.in
-                </a>
-              </p>
-            </div>
-
-            {/* 2. Hosta */}
-            <div className="glass p-6 space-y-3 transition md:hover:scale-105">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold">Hosta – Healthcare App</h3>
-                <span className="text-xs px-3 py-1 bg-green-500/20 text-green-300 rounded-full font-semibold">
-                  Live
-                </span>
-              </div>
-              <p className="text-sm text-foreground/60">
-                Find hospitals, book ambulances, and connect with donors
-              </p>
-            </div>
-
-            {/* 3. Digital Marketing */}
-            <div className="glass p-6 space-y-3 transition md:hover:scale-105">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold">Zorrow Digital Marketing</h3>
-                <span className="text-xs px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full font-semibold">
-                  Coming Soon
-                </span>
-              </div>
-              <p className="text-sm text-foreground/60">
-                Social media growth, paid ads, and brand strategy
-              </p>
-            </div>
-
-            {/* 4. Fashion */}
-            <div className="glass p-6 space-y-3 transition md:hover:scale-105">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold">Zorrow School of Fashion</h3>
-                <span className="text-xs px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full font-semibold">
-                  Concept
-                </span>
-              </div>
-              <p className="text-sm text-foreground/60">
-                Design, branding, and marketing education
-              </p>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>
-  );
+  )
 }
