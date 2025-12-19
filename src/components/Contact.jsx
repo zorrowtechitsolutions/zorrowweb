@@ -75,7 +75,7 @@ export default function Contact() {
             bg-white/2
             backdrop-blur-2xl
             border border-white/10
-            p-8 sm:p-10 md:p-12
+            p-8 sm:p-10 md:p-10
           "
         >
           {/* Inner glass highlight */}
@@ -211,3 +211,4 @@ export default function Contact() {
     </section>
   )
 }
+
