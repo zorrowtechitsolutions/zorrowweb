@@ -8,7 +8,7 @@ export default function Footer() {
       
       {/* FOOTER CONTENT */}
       <div className="max-w-5xl mx-auto px-6">
-        <div className="flex flex-col items-center text-center space-y-6">
+        <div className="flex flex-col items-center text-center  space-y-6">
           
           {/* BRAND */}
           <div className="space-y-2">
@@ -91,3 +91,4 @@ export default function Footer() {
     </footer>
   )
 }
+
