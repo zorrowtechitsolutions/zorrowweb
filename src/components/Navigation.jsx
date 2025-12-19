@@ -37,7 +37,7 @@ export default function Navigation() {
 
             {/* LOGO */}
             <div className="flex items-center gap-3">
-              <img src="/img1.png" alt="Zorrow Logo" width={40} height={40} />
+              <img src="/img1.png" alt="Zorrow Logo" width={70} height={70} />
               <span className="text-lg font-bold text-white">ZORROW</span>
             </div>
 
@@ -187,3 +187,4 @@ export default function Navigation() {
     </>
   )
 }
+
