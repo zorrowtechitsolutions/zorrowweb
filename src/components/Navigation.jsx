@@ -1,15 +1,11 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X, Phone, MessageCircle } from "lucide-react"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [showCallPopup, setShowCallPopup] = useState(false)
-
-  // Touch tracking
-  const touchStartY = useRef(0)
-  const touchEndY = useRef(0)
 
   const navLinks = [
     { label: "Home", href: "#home" },
@@ -21,22 +17,13 @@ export default function Navigation() {
     { label: "Contact", href: "#contact" },
   ]
 
-  // Detect real tap vs scroll
-  const handleTouchStart = (e) => {
-    touchStartY.current = e.touches[0].clientY
-  }
-
-  const handleTouchEnd = (e) => {
-    touchEndY.current = e.changedTouches[0].clientY
-
-    const diff = Math.abs(touchStartY.current - touchEndY.current)
-
-    // If finger moved more than 10px → SCROLL → ignore
-    if (diff > 10) return
-
-    // Otherwise → REAL TAP
-    setIsOpen((prev) => !prev)
-  }
+  /* ✅ AUTO CLOSE ON SCROLL */
+  useEffect(() => {
+    if (!isOpen) return
+    const close = () => setIsOpen(false)
+    window.addEventListener("scroll", close, { passive: true })
+    return () => window.removeEventListener("scroll", close)
+  }, [isOpen])
 
   return (
     <>
@@ -67,7 +54,7 @@ export default function Navigation() {
               ))}
             </div>
 
-            {/* DESKTOP BOOK CALL */}
+            {/* DESKTOP CTA */}
             <div className="hidden lg:block">
               <button
                 onClick={() => setShowCallPopup(true)}
@@ -77,26 +64,40 @@ export default function Navigation() {
               </button>
             </div>
 
-            {/* MOBILE TOGGLE — FIXED */}
+            {/* MOBILE MENU BUTTON */}
             <button
-              className="lg:hidden p-2 text-white"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              onClick={(e) => e.preventDefault()} // prevent ghost clicks
+              onClick={() => setIsOpen(true)}
+              disabled={isOpen}
+              className={`lg:hidden p-2 text-white transition ${
+                isOpen ? "pointer-events-none opacity-50" : ""
+              }`}
             >
-              {isOpen ? <X /> : <Menu />}
+              <Menu />
             </button>
 
           </div>
         </div>
       </nav>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU OVERLAY (LIGHT BACKGROUND) */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm">
-          <div className="absolute top-20 left-4 right-4 rounded-2xl bg-white/10 backdrop-blur-2xl border border-white/10">
+        <div
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="absolute top-20 left-4 right-4 rounded-2xl bg-white/10 backdrop-blur-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* CLOSE */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-3 right-3 text-white/70"
+            >
+              <X size={22} />
+            </button>
 
-            <div className="divide-y divide-white/10">
+            <div className="pt-12 divide-y divide-white/10">
               {navLinks.map(link => (
                 <a
                   key={link.href}
@@ -127,7 +128,7 @@ export default function Navigation() {
 
       {/* CALL POPUP */}
       {showCallPopup && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60">
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/40 backdrop-blur-sm">
           <div className="relative w-full max-w-sm p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/15">
 
             <button
