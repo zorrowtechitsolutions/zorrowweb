@@ -36,7 +36,7 @@ export default function Navigation() {
           <div className="flex justify-between items-center h-16 md:h-20">
 
             {/* LOGO */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
               <img src="/img1.png" alt="Zorrow Logo" width={70} height={70} />
               <span className="text-lg font-bold text-white">ZORROW</span>
             </div>
@@ -187,4 +187,5 @@ export default function Navigation() {
     </>
   )
 }
+
 
