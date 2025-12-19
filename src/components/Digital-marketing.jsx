@@ -17,7 +17,7 @@ export default function DigitalMarketing() {
   ]
 
   return (
-    <section id="marketing" className="py-5">
+    <section id="marketing" className="py-">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
@@ -48,3 +48,4 @@ export default function DigitalMarketing() {
     </section>
   )
 }
+
